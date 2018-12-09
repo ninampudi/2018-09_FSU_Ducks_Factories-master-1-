@@ -2,7 +2,8 @@
  * Class: Object-Oriented Design and Analysis
  * Professor: Orlando Montalvo
  * Assignment: HW 11
- * Date: 2018-11-28
+ * Date: 2018-12-07
+ * Author:NavyaInampudi
  */
 
 package HW11.edu.fitchburgstate.csc7400.duckpond.ducks;
@@ -12,6 +13,7 @@ import HW11.edu.fitchburgstate.csc7400.duckpond.behaviors.fly.FlyingBehavior;
 import HW11.edu.fitchburgstate.csc7400.duckpond.behaviors.quack.QuackBehavior;
 import HW11.edu.fitchburgstate.csc7400.duckpond.behaviors.swim.SwimBehavior;
 import external.Bitmap;
+import HW11.edu.fitchburgstate.csc7400.duckpond.behaviors.BehaviourStrategy;
 
 /**
  * Base duck class that will be used for ducks on the pond
@@ -35,14 +37,13 @@ public class Duck implements DuckType {
 
 	public Duck(String duckTypeName,
 			String bitmapFilename, 
-			FlyingBehavior flyingBehavior, 
-			SwimBehavior swimmingBehavior, 
-			QuackBehavior quackingBehavior) {
+			BehaviourStrategy behaviourstrategy)
+	{
 		this.duckTypeName = duckTypeName;
 		this.still = BehaviorHelper.createBitmap(bitmapFilename);
-		this.flyBehavior = flyingBehavior;
-		this.swimBehavior = swimmingBehavior;
-		this.quackBehavior = quackingBehavior;
+		this.flyBehavior = behaviourstrategy.getFlyBehavior();
+		this.swimBehavior = behaviourstrategy.getSwimBehavior();
+		this.quackBehavior = behaviourstrategy.getQuackBehavior();
 	}
 
 	/**
